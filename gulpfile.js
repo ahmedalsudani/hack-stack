@@ -65,6 +65,6 @@ gulp.task('dev', function () {
     ext: 'html js',
     tasks: ['lint'] })
     .on('restart', function () {
-      console.log('restarted!')
+      console.log('restarted!');
     });
 });
