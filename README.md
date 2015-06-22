@@ -81,7 +81,13 @@ single record, creating a record, etc.
 This service provides methods that are used by both `hackstack.mock` and `hackstack.wrap`
 services.  Those functions are:
 
-* `disableErrors(value)`: Disable random error generation. <br/>
+* `addErrorTrigger(errorFn, errorCode, method)`: Adds an "error trigger" that
+  will fire if `errorFn(response)` returns true (where `response` is the
+  response object that would otherwise be returned by HackStack) <br/>
+  `errorFn` : {function} predicate that decides whether error should be returned <br/>
+  `errorCode` : {integer} HTTP error code to return <br/>
+  `method` : {string} Which HTTP method to check error trigger against (e.g. 'POST')
+* `disableRandomErrors(value)`: Disable random error generation. <br/>
   `value` : {boolean}
 * `forceError(errorCode)`: Reject with this error code in the next response.
   Reset error if `errorCode` is `null`
@@ -90,10 +96,15 @@ services.  Those functions are:
 * `produceError(errorArray)`: Return either an error object or null depending
   on the probability distribution defined in the errorArray <br/>
   `errorArray` : {\[object]} (optional) an array of error objects
+* `randomError(errorArray)`: Return a random error from an array of errors
+  (`errorArray` or the default error array if none provided)
+  `errorArray` : {\[object]} (optional) an array of error objects
 * `getErrorByCode(errorCode)`: Returns an error object with error code matching
   `errorCode`. <br/>
   `errorCode` : {integer}
 * `randomInt()`: Returns a random integer. <br/>
+* `setOptions(newOptions)`: Updates the HackStack options list
+  `newOptions` : {object}
 * `waitForTime()`: Returns a promise that resolves after some time. Used to
   mimic latency <br/>
 
